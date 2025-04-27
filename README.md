@@ -10,6 +10,7 @@ Codigo para determinar como estan interconectados los AS a partir de archivos MR
 Se deben de agregar en el directorio archivosBgpDump todos los archivos dump MRT con lineas de ASPATH.
 A modo de ejemplo:
 
+```
 archivosBgpDump$ more rrc_00_bview_20230501_0000.txt | head
 ASPATH: 37721 6762
 ASPATH: 44393 50892
@@ -21,6 +22,7 @@ ASPATH: 35708
 ASPATH: 44103 1299
 ASPATH: 47422
 ASPATH: 34854 1299
+```
 
 En una prinera instancia (esta a agregar en una segunda versión) se deben de quitar los ASPATH con AS agregados, estos son los que tienen líneas con llaves { }. En una segunda versión voy a eliminarlas desde el script, pero estos ASPATH deben de eliminarse ya que no se sabe si los miemboros dentro de las llaves son vecinos.
 
@@ -29,17 +31,17 @@ En una prinera instancia (esta a agregar en una segunda versión) se deben de qu
 Este script toma todos los archivos de archivosBgpDump/ con el formato explicado en #Archivos de entrada#, analiza cada uno de los archivos y por cada uno de los archivos genera un archivo .json que tiene todos los AS que aparecen de forma consecutiva en el ASPATH (no considerando cuando el AS esta repetido) y los forma en parejas poniendo el menor primero.
 
 A modo de ejemplo si un archivo llamado **resultado_rrc_00_bview_20230501_0000.txt** tuviera las entradas
-
+```
 ASPATH 131464 136991
 ASPATH 115000 136991
 ASPATH 150022 45117
 ASPATH 1257 1257
-
+```
 Obtendríamos como salida en la carpeta **resultados/** un archivo **resultado_rrc_00_bview_20230501_0000.txt.json** con el siguiente formato
 
 ["131464,136991", "115000,136991", "45117,150022", "1257,48657"]
 
-
+```
 $ ls -hlrt resultados/
 total 43M
 -rw-rw-r-- 1 uai uai 1,9M jul 12  2023 resultado_rrc_04_bview_20230501_0000.txt.json
@@ -63,7 +65,7 @@ total 43M
 -rw-rw-r-- 1 uai uai 1,9M jul 12  2023 resultado_rrc_14_bview_20230501_0000.txt.json
 -rw-rw-r-- 1 uai uai 2,7M jul 12  2023 resultado_rrc_15_bview_20230501_0000.txt.json
 -rw-rw-r-- 1 uai uai 1,8M jul 12  2023 resultado_rrc_22_bview_20230501_0000.txt.json
-
+```
 # Script compiloDatosTopo.py
 
 El scirpt compiloDatosTopo.py, va a levantar todos los archivos de la carpeta resultados/ y va a compilar los datos de los mismos.
