@@ -3,7 +3,7 @@ Codigo para determinar como estan interconectados los AS a partir de archivos MR
 
 # Scirpts de trabajo
 
-**topo.py** Analiza los archivos de entrada y genera la información topologica a partir de cada uno de ellos
+**topo_v2.py** Analiza los archivos de entrada y genera la información topologica a partir de cada uno de ellos
 **compilodatosTopo** Compila resultados obtenidos en topo.py generando un archivo solo con toda la topología visualizada
 
 # Archivos de entrada
@@ -26,7 +26,7 @@ ASPATH: 34854 1299
 
 En una prinera instancia (esta a agregar en una segunda versión) se deben de quitar los ASPATH con AS agregados, estos son los que tienen líneas con llaves { }. En una segunda versión voy a eliminarlas desde el script, pero estos ASPATH deben de eliminarse ya que no se sabe si los miemboros dentro de las llaves son vecinos.
 
-# Script topo.py
+# Script topo_v2.py
 
 Este script toma todos los archivos de archivosBgpDump/ con el formato explicado en #Archivos de entrada#, analiza cada uno de los archivos y por cada uno de los archivos genera un archivo .json que tiene todos los AS que aparecen de forma consecutiva en el ASPATH (no considerando cuando el AS esta repetido) y los forma en parejas poniendo el menor primero.
 
@@ -71,3 +71,10 @@ total 43M
 El scirpt compiloDatosTopo.py, va a levantar todos los archivos de la carpeta resultados/ y va a compilar los datos de los mismos.
 
 El scrpit lo que hace es un or entre todos los json obtenidos previamente y deja el resultado en **topoTotal.json**
+
+# Script buscoParesTopo.py
+
+Este script sivre para debug, con el mismo se buscan pares dentro de un json de salida de una topología
+
+Ejemplo
+python buscoParesTopo.py resultados/resultado_rrc12_20250401.json 35,3356
